@@ -11,9 +11,10 @@ An interactive geospatial explorer created for the **NASA Space Apps Challenge 2
 
 - **Three radar observations:** 6 September, 30 September and 12 October 2026.
 - **Six map layers:** ascending, descending, union (Fusion OR), intersection (Fusion AND), orbit agreement and water-state transition.
-- **Interactive comparison:** one map or two synchronized maps, satellite or street basemap, layer transparency and geographic coordinates.
-- **Performance dashboard:** F1, precision, recall, F2 and time-series area comparison.
-- **Responsive layout:** light and dark themes for desktop and mobile.
+- **Interactive comparison:** single map, synchronized side-by-side maps, draggable swipe divider and an animated observation timeline. Includes satellite/street basemaps, transparency and coordinates.
+- **Performance dashboard:** F1, precision, recall, F2 and single-series or four-series area comparison.
+- **Animated hero GIF:** three real NISAR observation states displayed over the same fixed geographic subset. The GIF preserves the dates; it does not interpolate unobserved dates.
+- **Responsive layout:** balanced light and dark themes for desktop and mobile.
 
 ## Key result
 
@@ -45,6 +46,7 @@ index.html             Interactive geospatial interface
 assets/css/site.css    Responsive styles and light/dark themes
 assets/js/site.js      Map controls, area summaries and charts
 assets/maps/           17 georeferenced, transparent NISAR map layers
+assets/images/         Original data-derived animated GIF and still poster
 data/                  Source-based statistics and optical assessment
 scripts/build_maps.py  Re-create map layers from the NISAR raster products
 docs/                  Data sources and scientific methodology
