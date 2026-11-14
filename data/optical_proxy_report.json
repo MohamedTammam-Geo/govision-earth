@@ -1,0 +1,66 @@
+{
+  "epoch": "20260930",
+  "created_utc": "2026-11-14T13:35:49.808158+00:00",
+  "reference_type": "AUTOMATED_SINGLE_SCENE_SENTINEL2_OPTICAL_PROXY",
+  "reference_is_independent_of_SAR_predictions_for_label_creation": true,
+  "reference_is_ground_truth": false,
+  "validation_status": "EXPLORATORY_PROXY_ONLY_NOT_FIELD_VALIDATED",
+  "target": "OPEN SURFACE WATER (NOT VERIFIED NEW FLOOD)",
+  "sources": [
+    {
+      "scene_id": "COPERNICUS/S2_SR_HARMONIZED/20261002T033549_20261002T035200_T47PQR",
+      "utc": "2026-10-02T03:54:22.407000+00:00",
+      "delta_A_h": 29.15,
+      "delta_D_h": 40.12
+    },
+    {
+      "scene_id": "COPERNICUS/S2_SR_HARMONIZED/20260929T034201_20260929T035408_T47PQR",
+      "utc": "2026-09-29T03:54:36.173000+00:00",
+      "delta_A_h": 42.85,
+      "delta_D_h": 31.88
+    }
+  ],
+  "source_hashes": {
+    "sampling_design.json": "d0e1b8e1a9e8f4df373cf7ba4bbf5fb0d3e6ba88ced8059f1d426d5699357c4e",
+    "sample_key_private.csv": "903fc7a1cefc4c2cd2e6cccf2378ae2b088e0d2c2c91ccb9b8999484241cc334",
+    "samples_blind_TO_LABEL.csv": "636cbfb56953498dcf23cbcf45d2dcece1a3c7ed97ff373640dd546379ed6943",
+    "s2_scene_inventory_single_acquisitions.csv": "76ea8653387cc62effe6997a29c69bf5d0250172626846d28faeabcc58e35e16"
+  },
+  "pre_registered_water_thresholds": {
+    "mndwi_min": 0.07,
+    "ndwi_min": 0.0,
+    "swir_max": 0.16,
+    "nir_max": 0.2
+  },
+  "pre_registered_land_thresholds": {
+    "mndwi_max": -0.12,
+    "ndwi_max": 0.0,
+    "swir_min": 0.08
+  },
+  "method": "SCL-clear + prespecified NDWI/MNDWI and reflectance screens; no JRC or NISAR prediction used for optical labels",
+  "summary": {
+    "total_blind_samples": 260,
+    "high_confidence_optical_proxy": 162,
+    "optical_water": 103,
+    "optical_nonwater": 59,
+    "spatial_blocks": 51,
+    "represented_SAR_strata": 4,
+    "minimum_screen_pass": true,
+    "optical_proxy_acceptance_by_stratum": {
+      "ascending_only": 31,
+      "both_land": 52,
+      "both_water": 41,
+      "descending_only": 38
+    },
+    "bootstrap_valid_replicates": 1000
+  },
+  "limitations": [
+    "SCL and spectral thresholds are automated pseudo-reference, not independently human-labeled truth.",
+    "Persistent-water JRC 1984–2021 cannot establish flood status for 2026.",
+    "Single-date S2 scenes differ from radar acquisition by up to 48 hours.",
+    "Cloud/missing optical coverage is not missing at random.",
+    "Equal SAR-stratum sampling is NOT prevalence representative: unweighted F1 is sample-conditional.",
+    "Flooded vegetation and rice fields may produce ambiguous optical observations.",
+    "High proxy F1 cannot substitute for GISTDA, field, or blinded high-resolution human verification."
+  ]
+}

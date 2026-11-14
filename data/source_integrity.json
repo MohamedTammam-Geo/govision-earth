@@ -1,0 +1,31 @@
+{
+  "package": "SARFlow Explorer / NASA Space Apps 2026",
+  "created": "2026-11-14",
+  "source": "User Google Drive Results_2 frozen outputs",
+  "raster_source_sha256": {
+    "ASC_states_3epochs.tif.tiff": "aa4d38cabdd0a43fccd3beda91bcaa2aae050461ab2270a878ff3df685b6c655",
+    "DESC_states_3epochs.tif.tiff": "7e4607f69d196f9857dcddd35229940c5e96d663e1b5f68f2f731d7a6cafa13f",
+    "exposure_class_3epochs.tif.tiff": "cb22bba16a58c31d70f2f7b8c8ca13a4e0dfba30b81c8e3ae58f89042aec21e9",
+    "fusion_candidate_3epochs.tif.tiff": "c41e7d2b1a08777773dc4f987929563f0afb6d355df289ac13ca562e06092682",
+    "water_typology_3epochs.tif.tiff": "9706d43026ef936ce978c8e205e2de3235fcb88e72d84ef78595e2c08db181b9"
+  },
+  "web_assets_sha256": {
+    "20260906_agreement.png": "2a34bf6c9136ada2512847e2337bac0c78bf2abb07a7ffd8fd69ba40ec58ef14",
+    "20260906_and.png": "0780e25beff9ca5826b68443e631b077fbf1af614b845796064567b21357baed",
+    "20260906_asc.png": "12a72d579917a87d8bcc25748d2277a73d77c0772f3e1319f459b936fa90a119",
+    "20260906_desc.png": "8eae4a5a9ca4efd6d6f3e8abcdbd52a42767bc422f80717333baf72eed6ca85d",
+    "20260906_or.png": "24b38d52432a28f0e47a685da023951713aac3435bcf2c158f0bf2c7a3cd9352",
+    "20260930_agreement.png": "c14229105bfa60201f6ca384bfab325dafacffc4816356f92380326e4657009a",
+    "20260930_and.png": "b2ad6db72cbb53c22c417e015f2767f2e4d320c02831a00531053fd390962bcd",
+    "20260930_asc.png": "f4cad735e39a9b4bc0dd0bc803bc4e2ac657905c5af601232f8b269278de3bcb",
+    "20260930_desc.png": "323c3ae98cbbb9b7d4d93552fe41f0c6b80ed880f0f4e4ef8663da7f0a1607c0",
+    "20260930_or.png": "c544579d329eee62ab0192c8351fcd27829533df9b6a06e29603b5bba0a5072b",
+    "20260930_transition.png": "a29131322437329edd212b488de82a49f9ec0210618dec8492104904ccf45a6d",
+    "20261012_agreement.png": "504f51afa7705a4530d2c79cc782c3a227f715e7c6d7a85f1c1bdec63e6ed9e5",
+    "20261012_and.png": "c4c7e9f22d99d228988dce55af6bd989e75f560d19d337feabec192b6b260057",
+    "20261012_asc.png": "408c7bcdf8f0d3a1ea032b5e1e93da48711f1f37d8747001e42beffbf0874bc2",
+    "20261012_desc.png": "42eaa36c16011e5822b9144abe7389a76f8760387128a5c1d85310548072c279",
+    "20261012_or.png": "3d48230b3f2cb6f4755a14e2b241c2545785c669bb401a55dfb000b98df83be3",
+    "20261012_transition.png": "5b8932f59195e09abd0685e85339208cda08b3ccde62082fbf6d2e0558f86ddc"
+  }
+}

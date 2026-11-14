@@ -1,0 +1,141 @@
+{
+  "title": "SARFlow Explorer",
+  "location": "Prachin Buri search area, Thailand",
+  "aoi_note": "Research search rectangle; not a hydrologically delineated catchment",
+  "dates": [
+    {
+      "id": "20260906",
+      "label": "06 Sep 2026"
+    },
+    {
+      "id": "20260930",
+      "label": "30 Sep 2026"
+    },
+    {
+      "id": "20261012",
+      "label": "12 Oct 2026"
+    }
+  ],
+  "bounds": [
+    [
+      13.896591942254812,
+      101.24713697585301
+    ],
+    [
+      14.203563473349973,
+      101.60332757100562
+    ]
+  ],
+  "crs_source": "EPSG:32647",
+  "map_crs": "EPSG:4326",
+  "grid_resolution_m": 10,
+  "method_note": "NISAR L2 GCOV HH/HV candidate open-water states; no confirmed flood-onset classification",
+  "optical_reference": "Automated high-confidence Sentinel-2 optical proxy for 30 Sep only, n=162. Not field truth.",
+  "baseline_note": "06 Sep is a prior radar epoch, not established dry baseline",
+  "classes": {
+    "fusion": {
+      "0": "Both noncandidate",
+      "1": "Both candidate",
+      "2": "Ascending only",
+      "3": "Descending only",
+      "4": "Ambiguous",
+      "255": "No observation"
+    }
+  },
+  "area": {
+    "20260906": {
+      "a_km2": 364.8751,
+      "d_km2": 367.1347,
+      "and_km2": 298.8478,
+      "a_only_km2": 66.0273,
+      "d_only_km2": 68.2869,
+      "ambiguous_km2": 0.0,
+      "or_km2": 433.162
+    },
+    "20260930": {
+      "a_km2": 417.2659,
+      "d_km2": 414.1962,
+      "and_km2": 359.6704,
+      "a_only_km2": 57.5955,
+      "d_only_km2": 54.5258,
+      "ambiguous_km2": 90.3223,
+      "or_km2": 471.7917,
+      "became_candidate_km2": 122.9975,
+      "ceased_candidate_km2": 69.1531,
+      "persistent_candidate_km2": 348.7942
+    },
+    "20261012": {
+      "a_km2": 412.5691,
+      "d_km2": 413.9331,
+      "and_km2": 368.5729,
+      "a_only_km2": 43.9962,
+      "d_only_km2": 45.3602,
+      "ambiguous_km2": 110.6291,
+      "or_km2": 457.9293,
+      "became_candidate_km2": 113.8814,
+      "ceased_candidate_km2": 55.3542,
+      "persistent_candidate_km2": 344.0479
+    }
+  },
+  "map_images": {
+    "20260906_asc": "assets/maps/20260906_asc.png",
+    "20260906_desc": "assets/maps/20260906_desc.png",
+    "20260906_or": "assets/maps/20260906_or.png",
+    "20260906_and": "assets/maps/20260906_and.png",
+    "20260906_agreement": "assets/maps/20260906_agreement.png",
+    "20260930_asc": "assets/maps/20260930_asc.png",
+    "20260930_desc": "assets/maps/20260930_desc.png",
+    "20260930_or": "assets/maps/20260930_or.png",
+    "20260930_and": "assets/maps/20260930_and.png",
+    "20260930_agreement": "assets/maps/20260930_agreement.png",
+    "20260930_transition": "assets/maps/20260930_transition.png",
+    "20261012_asc": "assets/maps/20261012_asc.png",
+    "20261012_desc": "assets/maps/20261012_desc.png",
+    "20261012_or": "assets/maps/20261012_or.png",
+    "20261012_and": "assets/maps/20261012_and.png",
+    "20261012_agreement": "assets/maps/20261012_agreement.png",
+    "20261012_transition": "assets/maps/20261012_transition.png"
+  },
+  "optical_scores": [
+    {
+      "model": "Ascending",
+      "precision": 0.9166666666666666,
+      "recall": 0.6407766990291263,
+      "F1": 0.7542857142857143,
+      "F2": 0.6818181818181818,
+      "IoU": 0.6055045871559633,
+      "F1_CI95_low": 0.6852989352989353,
+      "F1_CI95_high": 0.8217273068267067
+    },
+    {
+      "model": "Descending",
+      "precision": 0.9240506329113924,
+      "recall": 0.7087378640776699,
+      "F1": 0.8021978021978022,
+      "F2": 0.7433808553971487,
+      "IoU": 0.6697247706422018,
+      "F1_CI95_low": 0.7272360703812317,
+      "F1_CI95_high": 0.8588273001508295
+    },
+    {
+      "model": "Fusion AND",
+      "precision": 0.975609756097561,
+      "recall": 0.3883495145631068,
+      "F1": 0.5555555555555556,
+      "F2": 0.44150110375275936,
+      "IoU": 0.38461538461538464,
+      "F1_CI95_low": 0.4030232558139535,
+      "F1_CI95_high": 0.6614232431472382
+    },
+    {
+      "model": "Fusion OR",
+      "precision": 0.9,
+      "recall": 0.9611650485436893,
+      "F1": 0.9295774647887324,
+      "F2": 0.9482758620689655,
+      "IoU": 0.868421052631579,
+      "F1_CI95_low": 0.8811329381345778,
+      "F1_CI95_high": 0.9646095326812606
+    }
+  ]
+}
