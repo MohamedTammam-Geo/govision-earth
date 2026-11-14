@@ -20,4 +20,5 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-This license covers original software, not third-party satellite data or tiles.
+This license applies to original application code, not third-party satellite
+imagery, data products, map tiles, or third-party libraries.

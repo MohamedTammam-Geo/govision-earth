@@ -1,0 +1,187 @@
+{
+  "project": "Govision Earth",
+  "application": "SARFlow Explorer",
+  "bounds": [
+    [
+      13.896452628808506,
+      101.24713697585301
+    ],
+    [
+      14.203563473349973,
+      101.60332757100562
+    ]
+  ],
+  "dates": [
+    "20260906",
+    "20260930",
+    "20261012"
+  ],
+  "area": {
+    "20260906": {
+      "asc": 364.8751,
+      "desc": 367.1347,
+      "and": 298.8478,
+      "or": 433.162,
+      "asc_only": 66.0273,
+      "desc_only": 68.2869,
+      "ambiguous": 0.0
+    },
+    "20260930": {
+      "asc": 417.2659,
+      "desc": 414.1962,
+      "and": 359.6704,
+      "or": 471.7917,
+      "asc_only": 57.5955,
+      "desc_only": 54.5258,
+      "ambiguous": 90.3223,
+      "new_observed": 122.9975,
+      "no_longer_observed": 69.1531
+    },
+    "20261012": {
+      "asc": 412.5691,
+      "desc": 413.9331,
+      "and": 368.5729,
+      "or": 457.9293,
+      "asc_only": 43.9962,
+      "desc_only": 45.3602,
+      "ambiguous": 110.6291,
+      "new_observed": 113.8814,
+      "no_longer_observed": 55.3542
+    }
+  },
+  "map_images": {
+    "20260906_asc": "assets/maps/20260906_asc.png",
+    "20260906_desc": "assets/maps/20260906_desc.png",
+    "20260906_or": "assets/maps/20260906_or.png",
+    "20260906_and": "assets/maps/20260906_and.png",
+    "20260906_agreement": "assets/maps/20260906_agreement.png",
+    "20260930_asc": "assets/maps/20260930_asc.png",
+    "20260930_desc": "assets/maps/20260930_desc.png",
+    "20260930_or": "assets/maps/20260930_or.png",
+    "20260930_and": "assets/maps/20260930_and.png",
+    "20260930_agreement": "assets/maps/20260930_agreement.png",
+    "20260930_transition": "assets/maps/20260930_transition.png",
+    "20261012_asc": "assets/maps/20261012_asc.png",
+    "20261012_desc": "assets/maps/20261012_desc.png",
+    "20261012_or": "assets/maps/20261012_or.png",
+    "20261012_and": "assets/maps/20261012_and.png",
+    "20261012_agreement": "assets/maps/20261012_agreement.png",
+    "20261012_transition": "assets/maps/20261012_transition.png"
+  },
+  "reference": "AUTOMATED_SENTINEL2_OPTICAL_PROXY",
+  "projection_source": "EPSG:32647",
+  "original_grid_m": 10,
+  "web_images": "EPSG:4326 / nearest-neighbor categorical / transparency",
+  "scores": [
+    {
+      "model": "Ascending",
+      "epoch": "20260930",
+      "reference": "AUTOMATED_OPTICAL_PROXY",
+      "n_optical_proxy": 162.0,
+      "water_proxy": 103.0,
+      "land_proxy": 59.0,
+      "TP": 66.0,
+      "FP": 6.0,
+      "FN": 37.0,
+      "TN": 53.0,
+      "precision": 0.9166666666666666,
+      "recall": 0.6407766990291263,
+      "F1": 0.7542857142857143,
+      "F2": 0.6818181818181818,
+      "IoU": 0.6055045871559633,
+      "accuracy": 0.7345679012345679,
+      "F1_CI95_low": 0.6852989352989353,
+      "F1_CI95_high": 0.8217273068267067
+    },
+    {
+      "model": "Descending",
+      "epoch": "20260930",
+      "reference": "AUTOMATED_OPTICAL_PROXY",
+      "n_optical_proxy": 162.0,
+      "water_proxy": 103.0,
+      "land_proxy": 59.0,
+      "TP": 73.0,
+      "FP": 6.0,
+      "FN": 30.0,
+      "TN": 53.0,
+      "precision": 0.9240506329113924,
+      "recall": 0.7087378640776699,
+      "F1": 0.8021978021978022,
+      "F2": 0.7433808553971487,
+      "IoU": 0.6697247706422018,
+      "accuracy": 0.7777777777777778,
+      "F1_CI95_low": 0.7272360703812317,
+      "F1_CI95_high": 0.8588273001508295
+    },
+    {
+      "model": "Fusion AND",
+      "epoch": "20260930",
+      "reference": "AUTOMATED_OPTICAL_PROXY",
+      "n_optical_proxy": 162.0,
+      "water_proxy": 103.0,
+      "land_proxy": 59.0,
+      "TP": 40.0,
+      "FP": 1.0,
+      "FN": 63.0,
+      "TN": 58.0,
+      "precision": 0.975609756097561,
+      "recall": 0.3883495145631068,
+      "F1": 0.5555555555555556,
+      "F2": 0.44150110375275936,
+      "IoU": 0.38461538461538464,
+      "accuracy": 0.6049382716049383,
+      "F1_CI95_low": 0.4030232558139535,
+      "F1_CI95_high": 0.6614232431472382
+    },
+    {
+      "model": "Fusion OR",
+      "epoch": "20260930",
+      "reference": "AUTOMATED_OPTICAL_PROXY",
+      "n_optical_proxy": 162.0,
+      "water_proxy": 103.0,
+      "land_proxy": 59.0,
+      "TP": 99.0,
+      "FP": 11.0,
+      "FN": 4.0,
+      "TN": 48.0,
+      "precision": 0.9,
+      "recall": 0.9611650485436893,
+      "F1": 0.9295774647887324,
+      "F2": 0.9482758620689655,
+      "IoU": 0.868421052631579,
+      "accuracy": 0.9074074074074074,
+      "F1_CI95_low": 0.8811329381345778,
+      "F1_CI95_high": 0.9646095326812606
+    }
+  ],
+  "paired": [
+    {
+      "comparison": "Descending minus Ascending",
+      "delta_proxy_F1": "0.0479120879120879",
+      "block_bootstrap_CI95_low": "-0.054648983099366756",
+      "block_bootstrap_CI95_high": "0.1469357926600605",
+      "conclusion": "EXPLORATORY_DIFFERENCE_ONLY"
+    },
+    {
+      "comparison": "Fusion AND minus Descending",
+      "delta_proxy_F1": "-0.24664224664224665",
+      "block_bootstrap_CI95_low": "-0.35791144101538125",
+      "block_bootstrap_CI95_high": "-0.14822278405192188",
+      "conclusion": "EXPLORATORY_DIFFERENCE_ONLY"
+    },
+    {
+      "comparison": "Fusion OR minus Descending",
+      "delta_proxy_F1": "0.12737966259093014",
+      "block_bootstrap_CI95_low": "0.07189643878742472",
+      "block_bootstrap_CI95_high": "0.19138987541671001",
+      "conclusion": "EXPLORATORY_DIFFERENCE_ONLY"
+    },
+    {
+      "comparison": "Fusion AND minus Ascending",
+      "delta_proxy_F1": "-0.19873015873015876",
+      "block_bootstrap_CI95_low": "-0.30970856834538746",
+      "block_bootstrap_CI95_high": "-0.11213815032195563",
+      "conclusion": "EXPLORATORY_DIFFERENCE_ONLY"
+    }
+  ]
+}

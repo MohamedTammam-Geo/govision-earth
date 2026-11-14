@@ -1,131 +1,66 @@
 # Govision Earth
 
-**SARFlow Explorer — Two Orbits. One Changing Landscape.**
+**SARFlow Explorer — Two radar views. A clearer picture of water.**
 
-[Explore the interactive map](#interactive-application) · [Results](#scientific-results) · [Methods](docs/SCIENTIFIC_NOTES.md) · [Data sources](docs/SOURCES.md) · [NASA Space Apps](https://www.spaceappschallenge.org/2026/)
+An interactive geospatial explorer created for the **NASA Space Apps Challenge 2026 — Dancing with the SARs**. The application uses NASA–ISRO NISAR L-band SAR observations to compare ascending, descending and fused surface-water classifications in Prachin Buri, Thailand.
 
-**Challenge:** NASA Space Apps Challenge 2026 — *Dancing with the SARs*  
-**Project and team:** Govision Earth  
-**Application:** SARFlow Explorer  
-**Study region:** Prachin Buri, Thailand (rectangular search area, not a delineated catchment)  
-**Primary measurements:** NASA–ISRO NISAR L2 GCOV, HH/HV polarizations, ascending and descending orbits.
+**Live website:** https://mohamedtammam-geo.github.io/govision-earth/  
+**Source repository:** https://github.com/MohamedTammam-Geo/govision-earth
 
-Govision Earth presents an interactive investigation of how radar viewing direction changes the mapping of surface-water signals. It brings together three NISAR observation dates, orbit-specific classifications, complementary fusion approaches, and an independent-source Sentinel-2 spectral comparison in one explorable map.
+## Explore
 
-**Research question:** *Which combination of ascending and descending NISAR observations provides the strongest agreement with clear-sky optical evidence of surface water?*
+- **Three radar observations:** 6 September, 30 September and 12 October 2026.
+- **Six map layers:** ascending, descending, union (Fusion OR), intersection (Fusion AND), orbit agreement and water-state transition.
+- **Interactive comparison:** one map or two synchronized maps, satellite or street basemap, layer transparency and geographic coordinates.
+- **Performance dashboard:** F1, precision, recall, F2 and time-series area comparison.
+- **Responsive layout:** light and dark themes for desktop and mobile.
 
-> This is an independent participant research demonstration. It is not an official NASA/ISRO product, flood warning, or certified flood-extent dataset.
+## Key result
 
-## The story in three steps
+For 30 September 2026, four strategies were compared using the same **162 selected high-confidence automated Sentinel-2 optical labels**.
 
-**Observe.** See how radar-derived surface-water candidates differ on **6 September**, **30 September**, and **12 October 2026**.  
-**Compare.** Switch among Ascending, Descending, Fusion OR (either orbit), Fusion AND (both orbits), and their agreement/disagreement.  
-**Evaluate.** Compare strategies against one held-out set of automated Sentinel-2 optical labels, with common sampling locations and block-bootstrap intervals.
+| Strategy | Precision | Recall | F1 |
+|---|---:|---:|---:|
+| Ascending | 0.917 | 0.641 | 0.754 |
+| Descending | 0.924 | 0.709 | 0.802 |
+| Fusion AND | **0.976** | 0.388 | 0.556 |
+| **Fusion OR** | 0.900 | **0.961** | **0.930** |
 
-The central contribution is an **explainable orbit-comparison experience**, not a claim that every water candidate is floodwater.
+Fusion OR provides the highest optical-reference F1 in this comparison. The reference labels were produced automatically from Sentinel-2 spectral observations rather than from a field survey, and the sampled points were stratified by SAR response. These scores describe this sample, not a region-wide flood accuracy estimate. The 6 September image is a prior observation rather than a confirmed dry baseline.
 
-## Interactive application
+## Run locally
 
-The static WebGIS includes:
-
-- **Temporal navigation:** three observation dates and comparison with the 6 September observation.
-- **Radar-view selector:** ascending, descending, fusion union, fusion intersection, and orbital agreement.
-- **Spatial controls:** pan, zoom, coordinates, scale, layer opacity, and a before/after swipe.
-- **Quantitative evidence:** water-candidate area trajectories, precision, recall, F1, and paired confidence intervals.
-- **Research context:** methods, source credits, and the scope of the optical comparison.
-
-**Live demo:** add the final GitHub Pages URL after deployment.  
-**Project page:** https://www.spaceappschallenge.org/2026/find-a-team/geovision-earth/?tab=project (team-page address visible in the supplied screenshot; confirm the page remains attached to the correct team).
-
-## Scientific results
-
-**Observation window:** 30 September 2026. **Comparison reference:** automated Sentinel-2 spectral labels for clear, unambiguous pixels. **Accepted points:** 162 of 260, across 51 spatial blocks.
-
-| Radar strategy | Precision | Recall | F1 | 95% block-bootstrap F1 interval |
-|---|---:|---:|---:|---|
-| Ascending | 0.917 | 0.641 | 0.754 | 0.685–0.822 |
-| Descending | 0.924 | 0.709 | 0.802 | 0.727–0.859 |
-| Fusion AND · both orbits | **0.976** | 0.388 | 0.556 | 0.403–0.661 |
-| **Fusion OR · either orbit** | 0.900 | **0.961** | **0.930** | 0.881–0.965 |
-
-Under this **sample-conditional optical-proxy comparison**, Fusion OR recorded the highest F1. Descending exceeded ascending by 0.048 F1, but the paired 95% interval (−0.055 to +0.147) contains zero; therefore this dataset does not establish a robust single-orbit winner. Fusion OR exceeded descending by 0.127 (paired interval +0.072 to +0.191) within this screening design.
-
-These values measure **agreement with automatically derived optical evidence of open surface water**. They do **not** represent independently field-verified flood detection, and unweighted metrics from a SAR-stratified, cloud-filtered sample do not establish area-wide accuracy. This precise distinction is part of the methodology, not an assessment of software quality.
-
-## Launch on GitHub Pages
-
-1. Create a **public** GitHub repository called `govision-earth` (or another available name).
-2. Upload the **contents of this folder**, including `index.html`, `assets`, `data`, `docs`, and `scripts`, to the root of the `main` branch. Do not upload only the ZIP.
-3. Open **Settings → Pages → Build and deployment**, select **Deploy from a branch**, choose **main / (root)**, then save.
-4. Open the published URL, typically `https://YOUR-USERNAME.github.io/govision-earth/`, and test the date selector, radar modes, map, opacity, and swipe comparison.
-5. Copy the actual working demo and repository URLs into your NASA Space Apps project submission.
-
-To test the page locally (the data JSON is loaded over HTTP):
+Download the repository and serve it with any HTTP server:
 
 ```bash
-cd Govision_Earth_GitHub_Ready_v2
 python -m http.server 8000
-# Visit http://localhost:8000
 ```
 
-The published website requires no private Earth Engine token. It uses precomputed overlay assets, Leaflet and public basemap services.
+Open http://localhost:8000/. No backend or secret credentials are required. External basemaps and the Leaflet library need an internet connection.
 
-## Repository structure
+## Project structure
 
 ```text
-Govision_Earth_GitHub_Ready_v2/
-├── index.html                    # Govision Earth / SARFlow interactive WebGIS
-├── README.md                     # Research summary and deployment guide
-├── LICENSE                       # Original application code license
-├── .gitignore
-├── assets/
-│   ├── css/styles.css            # Responsive interface
-│   ├── js/app.js                  # Controls, maps and plots
-│   ├── images/                   # Logo and previews
-│   └── maps/                     # 17 WGS84-reprojected display overlays
-├── data/
-│   ├── site_data.json            # Map extents and displayed metrics
-│   ├── optical_proxy_scores.csv  # Stage 08C performance table
-│   ├── paired_proxy_F1_differences.csv
-│   ├── optical_proxy_report.json
-│   └── source_integrity.json
-├── scripts/build_assets.py      # Raster-to-map asset exporter
-└── docs/
-    ├── SCIENTIFIC_NOTES.md      # Detailed methods and interpretation
-    ├── SOURCES.md               # Mission, datasets and map attribution
-    ├── STORYBOARD.md            # Demo narrative
-    └── DEVELOPMENT_LOG.md       # Factual development and source record
+index.html             Interactive geospatial interface
+assets/css/site.css    Responsive styles and light/dark themes
+assets/js/site.js      Map controls, area summaries and charts
+assets/maps/           17 georeferenced, transparent NISAR map layers
+data/                  Source-based statistics and optical assessment
+scripts/build_maps.py  Re-create map layers from the NISAR raster products
+docs/                  Data sources and scientific methodology
 ```
 
-## Reproduce the map assets
+The geographic layers are raster-derived PNG overlays reprojected to WGS84 for web display. Original analyses were produced on a 10 m UTM Zone 47N grid; presentation PNGs do not replace the source GeoTIFFs.
 
-The 17 transparent overlays were created from actual `Results_2` GeoTIFF classifications. The analytical rasters use **EPSG:32647 / 10 m**; presentation images were resampled with nearest-neighbor into WGS84 and are placed on the map using geographic image bounds. The PNGs are **display assets**, not standalone georeferenced analytical rasters.
+## Team
 
-```bash
-pip install numpy rasterio pillow affine
-python scripts/build_assets.py --source /path/to/Results2_rasters --output . --max-width 1650
-```
+**Govision Earth**
 
-Expected source raster names: `ASC_states_3epochs.tif`, `DESC_states_3epochs.tif`, `fusion_candidate_3epochs.tif`, and `water_typology_3epochs.tif`. The processing notebook and full-resolution raw NISAR inputs remain archived separately; they are not packaged in this lightweight static site.
+- Mohamed Elsayed Mohamed Tammam
+- Mona Hamdy Ahmed Ahmed
 
-## Scientific interpretation
+## Data and attribution
 
-- The AOI is a search rectangle in Prachin Buri, Thailand.
-- The 6 September observation is a comparison epoch; no claim is made that it represents a flood-free dry baseline.
-- Ascending and descending acquisitions are separated by approximately 10.97 hours.
-- The Sentinel-2 samples were taken from individual scenes on 29 September and 2 October; they are temporally proximate, not simultaneous ground observations.
-- The sample is SAR-stratified; cloud screening and optical ambiguity affect the eligible population.
-- JRC provides historical-water context, and ESA WorldCover provides historical land-cover context; neither independently confirms 2026 flood onset or damage.
-- The website describes surface-water candidates and orbit-comparison evidence, not flood depth or loss estimates.
+NASA–ISRO NISAR L2 GCOV HH/HV; Copernicus Sentinel-2 Surface Reflectance; historical JRC surface-water context. Satellite basemap imagery © Esri and contributing imagery providers; street basemap data © OpenStreetMap contributors. See [Data sources](docs/DATA_SOURCES.md) and [Scientific method](docs/SCIENTIFIC_METHOD.md).
 
-Detailed interpretation, formulas, evidence hierarchy, and limits: [Scientific Notes](docs/SCIENTIFIC_NOTES.md).
-
-## Data and acknowledgments
-
-This independent project uses open datasets from **NASA–ISRO NISAR**, **NASA GPM IMERG**, **Copernicus Sentinel-2 / ESA**, **JRC Global Surface Water**, and **ESA WorldCover**. Mapping uses **Leaflet**, **OpenStreetMap contributors**, and **CARTO**. Full resource links and attributions are in [SOURCES.md](docs/SOURCES.md). Original software is under the [MIT License](LICENSE); source data retain their respective providers' terms.
-
-## Submission essentials
-
-Provide the working application URL, source repository, a short demonstration, the project description, all data/resources and tool attributions, and any additional disclosures required by the official submission fields. Report work and contributor provenance accurately; do not infer a development schedule from the dates of satellite acquisitions. Refer to the [official submission guidance](https://www.spaceappschallenge.org/2026/).
-
-**Govision Earth** is an independent participant entry associated with the *Dancing with the SARs* challenge. NASA and ISRO do not endorse this implementation.
+Original application source code: MIT License. Third-party imagery and data remain subject to their respective terms.

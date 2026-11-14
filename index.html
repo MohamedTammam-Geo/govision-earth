@@ -1,108 +1,87 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#081522" />
-  <meta name="description" content="SARFlow Explorer uses NASA–ISRO NISAR radar observations to reveal how ascending, descending and fused orbits describe surface-water change in Prachin Buri, Thailand." />
-  <title>Govision Earth | SARFlow Explorer — NISAR Orbit Comparison</title>
-  <link rel="icon" href="assets/images/icon.svg" type="image/svg+xml" />
-  <link rel="preconnect" href="https://unpkg.com" crossorigin />
-  <link rel="preconnect" href="https://a.basemaps.cartocdn.com" crossorigin />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="stylesheet" href="assets/css/styles.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f7f9f8">
+  <meta name="description" content="Govision Earth SARFlow Explorer — interactive NASA–ISRO NISAR ascending, descending and fused radar observations of surface-water dynamics in Prachin Buri, Thailand.">
+  <title>Govision Earth | SARFlow Explorer</title>
+  <link rel="icon" href="assets/images/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
+  <link rel="stylesheet" href="assets/css/site.css">
 </head>
-<body>
-  <a class="skip" href="#explorer">Skip to interactive map</a>
-  <header class="site-header">
-    <a href="#top" class="brand" aria-label="Govision Earth — SARFlow Explorer home"><span class="brand-symbol" aria-hidden="true"><i></i><i></i><i></i></span><span><strong>GOVISION EARTH</strong><small>SARFLOW EXPLORER / 2026</small></span></a>
-    <nav aria-label="Main navigation"><a href="#story">The story</a><a href="#explorer">Explore data</a><a href="#evidence">The evidence</a><a href="#method">Methodology</a></nav>
-    <a class="header-action" href="#repo">View source <span aria-hidden="true">↗</span></a>
+<body data-theme="light">
+  <a href="#explorer" class="skip-link">Skip to the map</a>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="Govision Earth home"><span class="brand-mark" aria-hidden="true">◉</span><span><b>GOVISION EARTH</b><small>SARFlow Explorer</small></span></a>
+    <nav aria-label="Primary navigation"><a href="#explorer">Explorer</a><a href="#results">Results</a><a href="#method">Science</a></nav>
+    <div class="header-tools"><button id="theme-btn" class="icon-button" aria-label="Toggle light or dark theme" aria-pressed="false"><span aria-hidden="true">◐</span><span>Theme</span></button><a href="https://github.com/MohamedTammam-Geo/govision-earth" target="_blank" rel="noopener" class="source-link">GitHub <span aria-hidden="true">↗</span></a></div>
   </header>
-
-  <main id="top">
-    <section class="hero container" aria-labelledby="hero-title">
-      <div class="hero-copy">
-        <div class="eyebrow"><span class="pulse"></span> GOVISION EARTH <span class="eyebrow-sep">/</span> NASA SPACE APPS 2026 <span class="eyebrow-sep">/</span> DANCING WITH THE SARS</div>
-        <h1 id="hero-title">Two orbits.<br><em>One changing</em><br>landscape.</h1>
-        <p class="lead">Radar sees through clouds. But the direction it looks from changes what we detect. Explore three NISAR observations and discover what happens when we combine both viewing geometries.</p>
-        <div class="hero-buttons"><a href="#explorer" class="btn primary">Explore the radar story <span aria-hidden="true">↗</span></a><a href="#evidence" class="btn subtle">See the findings <span aria-hidden="true">↓</span></a></div>
-        <div class="hero-meta"><span><b>NISAR L-band</b> / HH + HV</span><span><b>3</b> radar epochs</span><span><b>Prachin Buri</b> / Thailand</span></div>
+  <main id="home">
+    <section class="intro container" aria-labelledby="intro-title">
+      <div class="intro-copy"><span class="eyebrow"><i></i> NASA SPACE APPS 2026 · DANCING WITH THE SARs</span>
+        <h1 id="intro-title">Two radar views.<br><em>A clearer picture of water.</em></h1>
+        <p>Explore how ascending and descending NISAR observations reveal different surface-water patterns — and how combining them changes what we can see.</p>
+        <div class="intro-actions"><a class="primary-btn" href="#explorer">Explore the map <span aria-hidden="true">↗</span></a><a class="text-btn" href="#results">Explore findings <span aria-hidden="true">↓</span></a></div>
       </div>
-      <div class="hero-visual" aria-label="Illustration based on 30 September NISAR fused radar classifications">
-        <img src="assets/images/hero_quicklook.webp" alt="Georeferenced NISAR orbital-agreement classification presented on a gridded dark background" />
-        <div class="hero-float top-float"><span class="float-label">OBSERVATION WINDOW</span><strong>06 SEP — 12 OCT</strong><small>2026 · Thailand</small></div>
-        <div class="hero-float bottom-float"><span class="float-label">RADAR PERSPECTIVES</span><div class="float-key"><i class="dot a"></i> ASC <i class="dot d"></i> DESC <i class="dot f"></i> FUSED</div></div>
-        <div class="visual-coordinate">EPSG:4326 / REPROJECTED FROM NISAR GCOV</div>
+      <div class="intro-side" aria-label="Observation overview"><div class="intro-grid-art"><img src="assets/maps/20260930_agreement.png" alt="NISAR orbit agreement classification for 30 September 2026" loading="eager"></div>
+        <div class="intro-label"><b>PRACHIN BURI · THAILAND</b><span>NASA–ISRO NISAR · L-band SAR</span></div>
       </div>
     </section>
+    <div class="facts-band"><div class="container facts"><div><b>03</b><span>Observation dates</span></div><div><b>02</b><span>Viewing directions</span></div><div><b>04</b><span>Detection strategies</span></div><div><b>162</b><span>Optical comparison samples</span></div></div></div>
 
-    <section class="story-band" id="story">
-      <div class="container story-inner">
-        <div class="section-kicker">01 / THE QUESTION</div>
-        <p>When a radar image reveals water, <span>which viewing direction tells the more complete story?</span></p>
-        <div class="story-steps"><div><b>01</b><span>Observe<br><small>Three acquisition dates</small></span></div><div><b>02</b><span>Compare<br><small>Ascending vs descending</small></span></div><div><b>03</b><span>Combine<br><small>Agreement and differences</small></span></div><div><b>04</b><span>Evaluate<br><small>Sentinel-2 optical reference</small></span></div></div>
-      </div>
-    </section>
-
-    <section class="explorer-section container" id="explorer" aria-labelledby="explorer-title">
-      <div class="section-head"><div><div class="section-kicker">02 / INTERACTIVE EXPLORER</div><h2 id="explorer-title">See what each orbit sees.</h2><p>Every colored pixel comes from processed NISAR classifications in the study results. Select a date and a view to inspect the same landscape through different radar perspectives.</p></div><span class="section-tag">Prachin Buri · 10 m source grid</span></div>
-      <div class="explorer-shell">
-        <aside class="controls-panel" aria-label="Map controls">
-          <div class="panel-heading"><span>01</span><h3>Observation date</h3></div>
-          <div class="date-options" role="group" aria-label="Choose date"><button type="button" data-date="20260906"><span>06</span><small>SEP 2026</small></button><button type="button" class="active" data-date="20260930"><span>30</span><small>SEP 2026</small></button><button type="button" data-date="20261012"><span>12</span><small>OCT 2026</small></button></div>
-          <div class="panel-divider"></div>
-          <div class="panel-heading"><span>02</span><h3>Radar perspective</h3></div>
-          <div class="mode-options" role="group" aria-label="Choose radar view">
-            <button type="button" data-mode="asc"><i class="mode-indicator asc"></i><span>Ascending<small>Single-orbit candidates</small></span><span class="mode-arrow">↗</span></button>
-            <button type="button" data-mode="desc"><i class="mode-indicator desc"></i><span>Descending<small>Single-orbit candidates</small></span><span class="mode-arrow">↘</span></button>
-            <button type="button" data-mode="or"><i class="mode-indicator or"></i><span>Fusion / OR<small>Detected by either orbit</small></span><span class="mode-arrow">∪</span></button>
-            <button type="button" data-mode="and"><i class="mode-indicator and"></i><span>Fusion / AND<small>Detected by both orbits</small></span><span class="mode-arrow">∩</span></button>
-            <button type="button" data-mode="agreement" class="active"><i class="mode-indicator agreement"></i><span>Orbit agreement<small>Where observations differ</small></span><span class="mode-arrow">◎</span></button>
-            <button type="button" data-mode="transition"><i class="mode-indicator transition"></i><span>Observed transition<small>Compared with 06 Sep</small></span><span class="mode-arrow">↔</span></button>
+    <section id="explorer" class="explorer-section container" aria-labelledby="explorer-title">
+      <div class="section-heading"><div><span class="eyebrow ink">INTERACTIVE ANALYSIS</span><h2 id="explorer-title">Explore the landscape</h2><p>Select an observation, compare radar perspectives and examine changes across the same geographic area.</p></div><div class="section-context">NISAR GCOV · HH/HV · 10 m analysis grid</div></div>
+      <div class="analysis-shell">
+        <aside class="panel controls" aria-label="Explorer controls">
+          <div class="panel-title">Observation <span>01</span></div>
+          <div class="date-picker" role="group" aria-label="Observation date"><button data-date="20260906" type="button"><b>06</b><small>SEP</small></button><button data-date="20260930" type="button" class="active"><b>30</b><small>SEP</small></button><button data-date="20261012" type="button"><b>12</b><small>OCT</small></button></div>
+          <span class="input-label">RADAR PERSPECTIVE</span>
+          <div class="view-buttons" role="group" aria-label="Radar layer selection">
+            <button type="button" data-view="or" class="active"><i class="swatch union"></i><span>Fusion · Either orbit<small>Combined detection</small></span></button>
+            <button type="button" data-view="and"><i class="swatch consensus"></i><span>Fusion · Both orbits<small>Shared detection</small></span></button>
+            <button type="button" data-view="asc"><i class="swatch ascending"></i><span>Ascending<small>Northbound viewing geometry</small></span></button>
+            <button type="button" data-view="desc"><i class="swatch descending"></i><span>Descending<small>Southbound viewing geometry</small></span></button>
+            <button type="button" data-view="agreement"><i class="swatch agreement"></i><span>Orbit agreement<small>Shared and distinct areas</small></span></button>
+            <button type="button" data-view="transition"><i class="swatch change"></i><span>Water-state change<small>Relative to 06 Sep</small></span></button>
           </div>
-          <div class="panel-divider"></div>
-          <div class="toggle-row"><div><b>Compare with 06 Sep</b><small>Drag to reveal prior observation</small></div><label class="switch" aria-label="Enable comparison"><input id="compare-toggle" type="checkbox" /><span></span></label></div>
-          <div class="opacity-control"><label for="layer-opacity">Layer intensity <b id="opacity-label">85%</b></label><input id="layer-opacity" type="range" min="25" max="100" value="85" /></div>
-          <button id="reset-map" class="reset-map" type="button">↖ Reset map extent</button>
+          <div class="control-separator"></div>
+          <span class="input-label">MAP BACKGROUND</span>
+          <div class="segmented" id="basemap-buttons" role="group" aria-label="Map background"><button type="button" data-basemap="satellite" class="active">Satellite</button><button type="button" data-basemap="streets">Streets</button></div>
+          <label class="toggle-line"><span>Place labels</span><input type="checkbox" id="labels-toggle" checked><span class="toggle-visual"></span></label>
+          <div class="control-separator"></div>
+          <div class="slider-title"><label for="opacity-range">Map layer opacity</label><output id="opacity-value">74%</output></div><input id="opacity-range" type="range" min="25" max="100" value="74" step="1">
+          <button type="button" class="quiet-button" id="reset-view">↗ &nbsp; Full study extent</button>
         </aside>
-        <div class="map-main">
-          <div class="map-toolbar"><div><span class="online-dot"></span><strong id="map-title">Orbit agreement</strong><span id="map-subtitle">30 Sep 2026</span></div><span class="map-coords" id="mouse-coords">14.05°N · 101.43°E</span></div>
-          <div id="map" role="application" aria-label="Interactive georeferenced NISAR water-state map"><div class="map-placeholder"><img src="assets/images/hero_quicklook.webp" alt="NISAR map quicklook" /><p>Interactive map requires JavaScript and Leaflet.</p></div></div>
-          <div id="swipe-ui" class="swipe-ui" hidden><div class="swipe-labels"><span>06 SEP / PRIOR</span><span id="swipe-current">30 SEP / SELECTED</span></div><input id="swipe-range" type="range" min="0" max="100" value="50" aria-label="Before and after comparison position" /><div class="swipe-marker" id="swipe-marker" aria-hidden="true"><span>⇆</span></div></div>
-          <div class="map-caption"><span><b>SOURCE</b> NASA–ISRO NISAR L2 GCOV, HH/HV · processed 10 m grid</span><span>Map layers reprojected EPSG:4326</span></div>
+        <div class="map-zone">
+          <div class="map-header"><div><strong id="map-heading">Fusion · Either orbit</strong><span id="map-epoch">30 September 2026</span></div><div class="map-header-actions"><div class="segmented small" role="group" aria-label="Map layout"><button data-layout="single" class="active">Single view</button><button data-layout="split">Compare side by side</button></div></div></div>
+          <div class="map-frame" id="map-frame"><div class="map-one"><div class="map-label">Selected view</div><div class="map-el" id="map-left"></div></div><div class="map-two" id="map-two"><div class="map-label">Compare with <select id="right-view" aria-label="Second map layer"><option value="desc">Descending</option><option value="asc">Ascending</option><option value="or">Fusion · Either</option><option value="and">Fusion · Both</option><option value="agreement">Orbit agreement</option></select></div><div class="map-el" id="map-right"></div></div></div>
+          <div class="map-footer"><div id="map-legend" class="legend" aria-label="Map legend"></div><span id="map-coords" class="coords">14.0500° N · 101.4200° E</span></div>
         </div>
-        <aside class="insights-panel" aria-label="Selected observation summary">
-          <div class="panel-heading"><span>03</span><h3>Read the landscape</h3></div>
-          <p class="insight-date" id="insight-date">30 SEPTEMBER 2026</p>
-          <div class="metric-feature"><small id="metric-feature-label">Union candidate area</small><div><strong id="metric-feature-value">471.79</strong><span>km²</span></div><p id="metric-feature-note">Candidate open water seen by at least one radar orbit.</p></div>
-          <div class="mini-metrics"><div><span>Both orbits</span><strong id="metric-agreement">359.67 <small>km²</small></strong></div><div><span>Ascending only</span><strong id="metric-asc-only">57.60 <small>km²</small></strong></div><div><span>Descending only</span><strong id="metric-desc-only">54.53 <small>km²</small></strong></div></div>
-          <div class="insight-rule"></div>
-          <div class="legend-title">MAP KEY</div><div id="map-legend" class="map-legend" aria-live="polite"></div>
-          <div class="interpretation"><span class="interpret-icon">i</span><p id="dynamic-insight">Each orbit sees a different set of candidate water pixels. Their overlap identifies where both views agree.</p></div>
+        <aside class="panel stats" aria-label="Observation statistics"><div class="panel-title">Observation summary <span>02</span></div>
+          <div class="current-date" id="stat-date">30 SEP 2026</div><span class="metric-label" id="metric-label">Water candidates · Either orbit</span><div class="hero-metric"><strong id="metric-value">471.79</strong><span>km²</span></div><p class="metric-hint" id="metric-hint">Areas detected by at least one viewing direction.</p>
+          <div class="stat-divider"></div><div class="stat-row"><span>Shared detections</span><strong id="stat-shared">359.67 km²</strong></div><div class="stat-row"><span>Ascending only</span><strong id="stat-asc">57.60 km²</strong></div><div class="stat-row"><span>Descending only</span><strong id="stat-desc">54.53 km²</strong></div><div class="stat-divider"></div><div class="stat-insight" id="stat-insight">Fusion combines water candidates recorded by either orbit.</div>
+          <button id="download-summary" type="button" class="export-btn">↓ &nbsp; Download observation table</button>
         </aside>
       </div>
-      <div class="map-story-nav"><button type="button" data-tour="1"><span>01</span> Start with the signal <b>→</b></button><button type="button" data-tour="2"><span>02</span> Compare the views <b>→</b></button><button type="button" data-tour="3"><span>03</span> Explore the fusion <b>→</b></button></div>
+      <div class="explorer-bottom"><span>Map layers are derived from processed NISAR observations for the Prachin Buri study area.</span><span id="overlay-credit">Satellite basemap © Esri and imagery contributors</span></div>
     </section>
 
-    <section class="evidence-section" id="evidence" aria-labelledby="evidence-title"><div class="container">
-      <div class="section-head evidence-head"><div><div class="section-kicker">03 / THE EVIDENCE</div><h2 id="evidence-title">The fused picture sees more.</h2><p>All four strategies were evaluated against the same 162 high-confidence automated Sentinel-2 optical proxy labels from the 30 September observation window.</p></div><div class="evidence-pill">30 SEP 2026 / OPTICAL-PROXY ASSESSMENT</div></div>
-      <div class="evidence-grid">
-        <div class="score-card"><div class="score-title"><div><span class="overline">F1 SCORE COMPARISON</span><h3>Four ways to see water</h3></div><span class="unit-label">0.0 — 1.0</span></div><div id="score-rows" class="score-rows" aria-label="F1 comparison chart"></div><div class="score-axis"><span>0.0</span><span>0.25</span><span>0.50</span><span>0.75</span><span>1.0</span></div><div class="score-card-footer"><span>Thin lines show 95% spatial-block bootstrap intervals</span><span>n = 162</span></div></div>
-        <div class="key-result-card"><span class="overline">THE KEY FINDING</span><h3>One view misses what another can detect.</h3><div class="big-score"><span>0.930</span><small>F1 · Fusion OR</small></div><div class="result-divider"></div><div class="result-stats"><div><strong>0.961</strong><span>Recall</span></div><div><strong>0.900</strong><span>Precision</span></div><div><strong>+0.127</strong><span>F1 vs descending</span></div></div><p>Fusion OR records candidate water wherever either orbit detects it. This produces the strongest agreement with the optical proxy across the retained sample.</p></div>
-      </div>
-      <div class="tradeoff-grid"><article class="tradeoff"><span class="overline">THE TRADE-OFF / 01</span><h3>Descending vs ascending</h3><p>Descending scores 0.802 and ascending 0.754. Their paired F1 difference is <strong>+0.048</strong>; the 95% interval crosses zero. A clear winner between the single orbits is not established by this test.</p><div class="range-tag">ΔF1 95% interval −0.055 to +0.147</div></article><article class="tradeoff"><span class="overline">THE TRADE-OFF / 02</span><h3>Precision or coverage?</h3><p>Fusion AND yields the highest precision (<strong>0.976</strong>) but lower recall (<strong>0.388</strong>). Fusion OR prioritizes coverage, detecting more optical water while accepting some extra false positives.</p><div class="range-tag">AND = intersection · OR = union</div></article><article class="tradeoff"><span class="overline">WHAT CHANGED / 03</span><h3>A temporal signal, not a flood-start date</h3><p>Union candidate water totals <strong>433.16 → 471.79 → 457.93 km²</strong> across the three radar observations. The September 6 record is a prior epoch, not an established dry baseline.</p><div class="range-tag">06 Sep → 30 Sep → 12 Oct</div></article></div>
-      <div class="timeline-card"><div><span class="overline">THE TEMPORAL RHYTHM</span><h3>Surface-water candidates through time</h3><p>Area in km², derived from full-resolution raster counts for each orbit and the two fusion rules.</p></div><div id="trend-chart" class="trend-chart"></div><div class="trend-legend"><span><i class="legend-dot o"></i>Either orbit (OR)</span><span><i class="legend-dot p"></i>Both orbits (AND)</span><span><i class="legend-dot a"></i>Ascending</span><span><i class="legend-dot d"></i>Descending</span></div></div>
+    <section id="results" class="results-section"><div class="container">
+      <div class="section-heading"><div><span class="eyebrow ink">ORBIT PERFORMANCE</span><h2>What does the comparison show?</h2><p>Four strategies assessed on the same 162 selected Sentinel-2 optical-reference samples for 30 September 2026.</p></div><div class="result-feature"><span>Highest F1 in the optical comparison</span><b>0.930</b><small>Fusion · Either orbit</small></div></div>
+      <div class="analytics-grid"><div class="white-card performance"><div class="card-head"><div><span class="minor-label">STRATEGY COMPARISON</span><h3>Detection performance</h3></div><div class="segmented small" id="metric-choose"><button data-metric="F1" class="active">F1</button><button data-metric="precision">Precision</button><button data-metric="recall">Recall</button><button data-metric="F2">F2</button></div></div><div class="score-chart" id="score-chart" aria-live="polite"></div><div class="chart-caption" id="score-caption">F1 · 95% spatial-block bootstrap interval · n = 162</div></div>
+      <div class="white-card story-card"><span class="minor-label">THE FINDING</span><h3>Each orbit reveals something the other does not.</h3><p>The union of ascending and descending classifications produces the highest agreement with the automated optical reference in the current comparison.</p><div class="finding-comparison"><div><b>0.754</b><span>Ascending F1</span></div><div><b>0.802</b><span>Descending F1</span></div><div class="accent"><b>0.930</b><span>Fusion OR F1</span></div></div><p class="small-print">Descending’s F1 exceeds ascending by 0.048 on this sample; the paired interval includes zero.</p></div></div>
+      <div class="white-card time-card"><div class="card-head"><div><span class="minor-label">OBSERVATION SERIES</span><h3>Water candidates through time</h3></div><div class="segmented small" id="trend-choice"><button data-trend="or" class="active">Either</button><button data-trend="and">Both</button><button data-trend="asc">Ascending</button><button data-trend="desc">Descending</button></div></div><div class="trend-holder" id="trend-chart"></div><div class="chart-caption">Areas calculated from the full-resolution categorical maps (km²). The records describe changes in radar-detected water candidates.</div></div>
     </div></section>
 
-    <section class="method-section container" id="method"><div class="method-head"><div class="section-kicker">04 / TRANSPARENT SCIENCE</div><h2>Built on radar. Grounded in evidence.</h2><p>A defensible observation is more useful than an overstated claim. The interface separates radar-derived candidates, optical-proxy assessment and interpretation of event-related change.</p></div>
-      <div class="method-grid"><div class="method-item"><span>01</span><h3>Radar data</h3><p>NASA–ISRO NISAR L2 GCOV, HH/HV, ascending and descending passes on 06 Sep, 30 Sep and 12 Oct 2026. Native analytical grid: 10 m, UTM zone 47N.</p></div><div class="method-item"><span>02</span><h3>Water-state extraction</h3><p>Orbit-specific HH/HV classification and explicit brightening/ambiguity screening. Union, intersection and disagreement categories are derived from Stage 04–07 outputs.</p></div><div class="method-item"><span>03</span><h3>Optical comparison</h3><p>162 clear, high-confidence automated Sentinel-2 spectral labels from two individual scenes within 48 hours of both orbit acquisitions on 30 Sep. 51 spatial blocks.</p></div><div class="method-item"><span>04</span><h3>Interpretation boundary</h3><p>Results describe radar-derived candidate surface water and optical-proxy agreement, not independently observed inundation onset, water depth or crop losses. The 06 Sep baseline is not established as dry.</p></div></div>
-      <div class="science-foot"><div><span class="science-quote">“</span><p>The map is not the conclusion. The comparison is.</p></div><a href="docs/SCIENTIFIC_NOTES.md">Read the full research notes <span aria-hidden="true">↗</span></a></div>
+    <section id="method" class="method-section container"><div class="section-heading"><div><span class="eyebrow ink">SCIENTIFIC WORKFLOW</span><h2>From radar observations to an interactive map</h2><p>A focused workflow connects orbital geometry, water-state mapping and a consistent optical comparison.</p></div></div>
+    <div class="method-cards"><article><span>01 / NISAR</span><h3>Observe</h3><p>NASA–ISRO NISAR L2 GCOV, HH/HV, from ascending and descending passes across three acquisition dates.</p></article><article><span>02 / GEOSPATIAL</span><h3>Map</h3><p>Orbit-specific water candidates and shared detections mapped on a consistent 10 m geospatial grid.</p></article><article><span>03 / OPTICAL</span><h3>Compare</h3><p>Strategies assessed against 162 selected automated Sentinel-2 spectral labels near 30 September.</p></article></div>
+    <p class="scope-note"><b>Interpretation:</b> The comparison measures agreement with automated Sentinel-2 optical labels for visible surface water. Dates 06 September, 30 September and 12 October describe radar water-state observations; these maps do not independently establish flood onset.</p>
     </section>
-    <section id="repo" class="callout"><div class="container callout-inner"><div><span class="section-kicker">05 / OPEN SCIENCE</span><h2>Explore it. Inspect it. Reproduce it.</h2><p>Static GitHub Pages application, real NISAR-derived map assets, metric tables, provenance and a reproducible export script. Designed for review, not hidden behind a server or API key.</p></div><div class="callout-actions"><a class="btn primary" href="README.md">Project README ↗</a><a class="btn subtle" href="docs/SCIENTIFIC_NOTES.md">Methods & limitations ↗</a></div></div></section>
   </main>
-  <footer class="site-footer container"><div><b>GOVISION EARTH</b><span>SARFlow Explorer · NASA Space Apps 2026 · Dancing with the SARs</span></div><div><span>NISAR © NASA/ISRO mission data · Sentinel-2 © Copernicus / ESA · Map tiles © OpenStreetMap / CARTO</span><small>Independent participant project. Not an official NASA product or endorsement.</small></div></footer>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
-  <script src="assets/js/app.js" defer></script>
+  <footer class="footer"><div class="container footer-inner"><div><strong>GOVISION EARTH</strong><span>NASA Space Apps Challenge 2026 · Dancing with the SARs</span></div><div class="team"><b>Team</b><span>Mohamed Elsayed Mohamed Tammam</span><span>Mona Hamdy Ahmed Ahmed</span></div><div class="credits"><span>NISAR: NASA / ISRO · Sentinel-2: Copernicus / ESA</span><span>Basemaps: Esri imagery / OpenStreetMap contributors</span><a href="https://github.com/MohamedTammam-Geo/govision-earth" target="_blank" rel="noopener">Source code ↗</a></div></div></footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" defer></script>
+  <script src="assets/js/site.js" defer></script>
 </body>
 </html>
