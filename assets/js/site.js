@@ -12,7 +12,7 @@
     agreement:[['#7d6fe5','Both orbits'],['#189ee6','Ascending only'],['#f49b3f','Descending only'],['#a3abb4','Complex response']],
     transition:[['#e24c86','Newly detected'],['#f49b3f','No longer detected'],['#7d6fe5','Detected at both dates']]
   };
-  const state = {date:'20260930',view:'or',right:'desc',basemap:'satellite',layout:'single',opacity:.74,labels:true,metric:'F1',trend:'all',theme:'light',swipe:50,playing:false};
+  const state = {date:'20260930',view:'or',right:'desc',basemap:'satellite',layout:'single',opacity:.74,labels:true,metric:'F1',trend:'all',theme:'light',swipe:50,playing:false,gifSpeed:1900};
   const maps={left:null,right:null},overlays={left:null,right:null},baselayers={left:null,right:null},labelLayers={left:null,right:null};
   let app=null,lock=false,interval=null;
   const num = x => Number(x ?? 0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
@@ -89,14 +89,25 @@
     frame.classList.toggle('swipe',state.layout==='swipe');
     frame.classList.toggle('animate',state.layout==='animate');
     frame.style.setProperty('--swipe-pos',state.swipe+'%');
-    if(state.layout==='split'||state.layout==='swipe'){
-      createMap('right');setTimeout(()=>{
-        maps.left?.invalidateSize();maps.right?.invalidateSize();sync('left','right');drawOverlay('right',state.right);
-      },180);
-    }else{setTimeout(()=>maps.left?.invalidateSize(),100)}
+    const comparing=state.layout==='split'||state.layout==='swipe';
+    if(comparing)createMap('right');
+    // Leaflet must measure both maps AFTER their containers become visible.
+    const resizeMaps=()=>{
+      maps.left?.invalidateSize({pan:false});
+      if(comparing&&maps.right&&maps.left){
+        maps.right.invalidateSize({pan:false});
+        maps.right.setView(maps.left.getCenter(),maps.left.getZoom(),{animate:false});
+        drawOverlay('right',state.right);
+        overlays.right?.bringToFront();
+      }
+    };
+    requestAnimationFrame(()=>requestAnimationFrame(resizeMaps));
+    // Final pass also handles slow layout/font transitions.
+    setTimeout(resizeMaps,260);
     if(state.layout==='animate')startTimeline();else stopTimeline();
     const btn=$('timeline-mode');
     if(btn)btn.textContent=state.layout==='animate'?(state.playing?'❚❚ Pause':'▶ Resume'):'▶ GIF';
+    const speed=$('gif-speed-control');if(speed)speed.hidden=state.layout!=='animate';
     updateSummary();
   }
   function stopTimeline(){if(interval!==null){window.clearInterval(interval);interval=null}state.playing=false;}
@@ -110,7 +121,7 @@
       const idx=dates.indexOf(state.date);
       state.date=dates[(idx+1)%dates.length];
       updateSummary();renderMap();
-    },1900);
+    },state.gifSpeed);
     updateTimelineCaption();
   }
   function updateTimelineCaption(){
@@ -180,6 +191,24 @@
     for(const d of app.dates){const a=app.area[d];lines.push([d,a.asc,a.desc,a.or,a.and,a.asc_only,a.desc_only].join(','))}
     const blob=new Blob([lines.join('\n')],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='Govision_Earth_NISAR_Areas.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),2000)
   }
+  function installGifSpeed(){
+    const anchor=document.querySelector('.view-buttons');
+    if(!anchor||$('gif-speed-control'))return;
+    const box=document.createElement('div');
+    box.id='gif-speed-control';box.className='gif-speed-control';box.hidden=true;
+    box.innerHTML='<label for="gif-speed-select" class="minor-label">GIF PLAYBACK SPEED</label>'+
+      '<select id="gif-speed-select" aria-label="GIF frame duration">'+
+      '<option value="3500">Slow · 3.5 seconds</option>'+
+      '<option value="1900" selected>Normal · 1.9 seconds</option>'+
+      '<option value="800">Fast · 0.8 seconds</option></select>';
+    anchor.insertAdjacentElement('afterend',box);
+    $('gif-speed-select').addEventListener('change',e=>{
+      state.gifSpeed=Number(e.target.value);
+      $('map-frame').style.setProperty('--gif-duration',state.gifSpeed+'ms');
+      if(state.layout==='animate'&&state.playing)startTimeline();
+    });
+    $('map-frame').style.setProperty('--gif-duration',state.gifSpeed+'ms');
+  }
   function listen(){
     $$('[data-date]').forEach(b=>b.addEventListener('click',()=>{if(state.layout==='animate'){state.layout='single';updateLayout()}state.date=b.dataset.date;if(state.date==='20260906'&&state.view==='transition')state.view='agreement';updateSummary();renderMap()}));
     $$('[data-view]').forEach(b=>b.addEventListener('click',()=>{state.view=b.dataset.view;if(state.view==='transition'&&state.date==='20260906')state.date='20260930';updateSummary();renderMap()}));
@@ -199,7 +228,7 @@
     try{
       const response=await fetch('data/app_data.json');if(!response.ok)throw Error('Missing data/app_data.json');app=await response.json();
       if(!app.bounds||!app.area||!app.map_images||!app.scores)throw Error('Dataset incomplete');
-      listen();try{setTheme(localStorage.getItem('govision-theme')==='dark'?'dark':'light')}catch(e){setTheme('light')}
+      installGifSpeed();listen();try{setTheme(localStorage.getItem('govision-theme')==='dark'?'dark':'light')}catch(e){setTheme('light')}
       updateSummary();scoreChart();trendChart();
       if(typeof L==='undefined')throw Error('Leaflet library failed to load. Verify CDN connectivity.');
       createMap('left');
