@@ -53,3 +53,27 @@ body[data-theme="dark"] .footer{background:#10252e}
 @media(max-width:760px){.intro-side{height:226px}.layout-modes{width:100%}.layout-modes button{padding:9px 4px;font-size:10px}.map-frame.swipe .map-two{border:0;min-height:0}.map-frame.swipe .map-two .map-el{min-height:440px}.map-header-actions{width:100%}.map-header .layout-modes{max-width:none}.trend-series-legend{justify-content:start}.swipe-handle{height:43px;width:43px}}
 @media(max-width:420px){.intro-side{height:190px}.layout-modes button{font-size:9px}.map-frame.swipe .map-two .map-el{min-height:440px}.map-label{font-size:9px;padding:6px 7px}}
 @media(prefers-reduced-motion:reduce){.timelapse-track i{animation:none}html{scroll-behavior:auto}}
+
+/* Fix Swipe: ensure both Leaflet maps are visible */
+
+.map-frame.swipe .map-one {
+    position: relative;
+    z-index: 1;
+    isolation: isolate;
+}
+
+.map-frame.swipe .map-two {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    clip-path: inset(0 0 0 var(--swipe-pos));
+    pointer-events: none;
+    isolation: isolate;
+}
+
+.map-frame.swipe .swipe-tool {
+    display: block;
+    z-index: 3;
+}
+
