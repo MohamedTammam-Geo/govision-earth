@@ -24,11 +24,13 @@ body[data-theme="dark"] .intro-side,body[data-theme="dark"] .intro-grid-art{back
 .map-header-actions{max-width:100%}
 .layout-modes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));min-width:min(425px,100%)}
 .layout-modes button{font-size:11px;padding:9px 11px;white-space:nowrap}
-.map-frame.swipe .map-one{flex:1 1 100%}
-.map-frame.swipe .map-two{display:block;position:absolute;inset:0;z-index:380;border:0;clip-path:inset(0 0 0 var(--swipe-pos));pointer-events:none}
+/* Swipe: two independent, full-width Leaflet canvases, clipped on the right. */
+.map-frame.swipe{position:relative;isolation:isolate;overflow:hidden}
+.map-frame.swipe .map-one{position:relative;flex:0 0 100%;width:100%;z-index:1;isolation:isolate}
+.map-frame.swipe .map-two{display:block;position:absolute;inset:0;width:100%;height:100%;min-width:0;z-index:2;isolation:isolate;border:0;clip-path:inset(0 0 0 var(--swipe-pos,50%));pointer-events:none}
 .map-frame.swipe .map-two .map-label{pointer-events:auto;right:13px;left:auto}
 .map-frame.swipe .map-two .map-el,.map-frame.swipe .map-two .leaflet-container{pointer-events:none}
-.swipe-tool{display:none;pointer-events:none;position:absolute;inset:0;z-index:820}
+.swipe-tool{display:none;pointer-events:none;position:absolute;inset:0;z-index:3}
 .map-frame.swipe .swipe-tool{display:block}
 .swipe-divider{position:absolute;left:var(--swipe-pos);top:0;bottom:0;width:3px;transform:translateX(-50%);background:#fff;box-shadow:0 0 2px #102630,0 0 15px #102630;pointer-events:none}
 .swipe-handle{position:absolute;left:var(--swipe-pos);top:50%;width:49px;height:49px;transform:translate(-50%,-50%);border-radius:50%;border:3px solid white;background:#173949;color:white;display:grid;place-items:center;font-size:23px;line-height:1;cursor:ew-resize;pointer-events:auto;touch-action:none;box-shadow:0 4px 25px #11252e70;user-select:none}
@@ -53,27 +55,3 @@ body[data-theme="dark"] .footer{background:#10252e}
 @media(max-width:760px){.intro-side{height:226px}.layout-modes{width:100%}.layout-modes button{padding:9px 4px;font-size:10px}.map-frame.swipe .map-two{border:0;min-height:0}.map-frame.swipe .map-two .map-el{min-height:440px}.map-header-actions{width:100%}.map-header .layout-modes{max-width:none}.trend-series-legend{justify-content:start}.swipe-handle{height:43px;width:43px}}
 @media(max-width:420px){.intro-side{height:190px}.layout-modes button{font-size:9px}.map-frame.swipe .map-two .map-el{min-height:440px}.map-label{font-size:9px;padding:6px 7px}}
 @media(prefers-reduced-motion:reduce){.timelapse-track i{animation:none}html{scroll-behavior:auto}}
-
-/* Fix Swipe: ensure both Leaflet maps are visible */
-
-.map-frame.swipe .map-one {
-    position: relative;
-    z-index: 1;
-    isolation: isolate;
-}
-
-.map-frame.swipe .map-two {
-    display: block;
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    clip-path: inset(0 0 0 var(--swipe-pos));
-    pointer-events: none;
-    isolation: isolate;
-}
-
-.map-frame.swipe .swipe-tool {
-    display: block;
-    z-index: 3;
-}
-
